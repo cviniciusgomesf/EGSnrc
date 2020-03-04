@@ -1,0 +1,48 @@
+:start geometry definition:
+   :start geometry:
+        name        = my_box
+        library     = egs_box
+        box size    = 2 3 5
+        :start media input:
+            media = water
+        :stop media input:
+    :stop geometry:
+
+    :start geometry:
+        name        = sphere
+        library     = egs_spheres
+        midpoint = 0 0 1
+        radii = 0.5
+        :start media input:
+            media = air
+        :stop media input:
+    :stop geometry:
+    
+    :start geometry:
+	name = cylinder
+	library = egs_cylinders
+	type = EGS_YCylinders
+	midpoint = 0 0 3 
+	radii = 3 
+    :stop geometry:
+
+    :start geometry:
+	library = egs_planes
+	type = EGS_Yplanes
+	name = the_plane
+	positions = 0 2 
+    :stop geometry:	
+
+    :start geometry:
+        name        = my_envelope
+        library     = egs_genvelope
+        base geometry = my_box
+
+        # Inscribed geometries must be strictly inside the envelope
+        # No touching of surfaces!
+        inscribed geometries = sphere the_plane
+    :stop geometry:
+
+    simulation geometry = my_envelope
+
+:stop geometry definition:
